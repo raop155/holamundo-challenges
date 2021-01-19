@@ -1,11 +1,14 @@
 import { Switch, Route } from 'react-router-dom';
-import { Home } from './pages';
+import { Home, Schedule } from './pages';
 
 function App() {
   return (
     <Switch>
-      <Route to='/' exact>
+      <Route path='/' exact>
         <Home />
+      </Route>
+      <Route path='/schedule'>
+        <Schedule />
       </Route>
     </Switch>
   );

@@ -1,4 +1,8 @@
 .component {
+  a:hover {
+    color: var(--teal);
+  }
+
   li {
     color: var(--teal);
   }

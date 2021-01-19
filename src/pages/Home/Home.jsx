@@ -10,7 +10,7 @@ const challenges = [
 
 const Home = () => {
   return (
-    <div id='home' className={styles.component}>
+    <main id='home' className={styles.component}>
       <div className='container'>
         <h1>Challenges:</h1>
         <ul>
@@ -23,7 +23,7 @@ const Home = () => {
           })}
         </ul>
       </div>
-    </div>
+    </main>
   );
 };
 
