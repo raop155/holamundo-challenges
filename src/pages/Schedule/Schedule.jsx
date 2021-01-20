@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { List } from './List';
+import List from './List';
 
 const hours = [
   '08:00',
@@ -45,7 +45,9 @@ const Schedule = () => {
     <main id='schedule'>
       <div className='container'>
         <h1>#Schedule Challenge</h1>
-        <p className='text-right text-info text-uppercase'>Motorcyclists left: {resources}</p>
+        <p className='text-right text-info text-uppercase'>
+          Motorcyclists left: <b className='text-info'>{resources}</b>
+        </p>
         <List
           hours={hours}
           resources={resources}

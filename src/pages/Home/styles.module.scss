@@ -1,9 +1,10 @@
 .component {
   a:hover {
-    color: var(--teal);
+    color: var(--info);
   }
 
   li {
-    color: var(--teal);
+    color: var(--info);
+    font-size: 1.25rem;
   }
 }

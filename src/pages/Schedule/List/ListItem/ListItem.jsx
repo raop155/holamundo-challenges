@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-const ListItem = ({ hours, isBlocked, addResource, removeResource }) => {
+const ListItem = ({ interval, isBlocked, addResource, removeResource }) => {
   const [style, setStyle] = useState('dark');
   const [quantity, setQuantity] = useState(0);
 
@@ -35,10 +35,10 @@ const ListItem = ({ hours, isBlocked, addResource, removeResource }) => {
 
   return (
     <div>
-      {hours && (
+      {interval && (
         <li className={`list-group-item list-group-item-${style}`} onClick={handleClick}>
           <div className='d-flex justify-content-between align-items-end'>
-            <div>{hours}</div>
+            <div>{interval}</div>
             <div>Quantity: {quantity}/1</div>
           </div>
         </li>
@@ -52,7 +52,10 @@ ListItem.defaultProps = {
 };
 
 ListItem.propTypes = {
-  hours: PropTypes.string.isRequired,
+  interval: PropTypes.string.isRequired,
+  isBlocked: PropTypes.bool.isRequired,
+  addResource: PropTypes.func.isRequired,
+  removeResource: PropTypes.func.isRequired,
 };
 
 export default ListItem;

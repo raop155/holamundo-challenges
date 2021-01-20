@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
-import { ListItem } from './ListItem';
+import ListItem from './ListItem';
 import PropTypes from 'prop-types';
 
 const List = ({ hours, resources, addResource, removeResource }) => {
@@ -28,7 +28,7 @@ const List = ({ hours, resources, addResource, removeResource }) => {
         {intervals.map((interval, index) => (
           <ListItem
             key={index}
-            hours={interval}
+            interval={interval}
             isBlocked={isBlocked}
             resources={resources}
             addResource={addResource}
@@ -42,6 +42,9 @@ const List = ({ hours, resources, addResource, removeResource }) => {
 
 List.propTypes = {
   hours: PropTypes.array.isRequired,
+  resources: PropTypes.number.isRequired,
+  addResource: PropTypes.func.isRequired,
+  removeResource: PropTypes.func.isRequired,
 };
 
 export default List;
