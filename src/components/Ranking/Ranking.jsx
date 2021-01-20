@@ -1,61 +1,69 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import RankingItem from './RankingItem';
+import victorySound from 'assets/victory.mp3';
+import useSound from 'use-sound';
 
 const getMinutesBetweenDates = (startDate, endDate) => {
   var diff = endDate.getTime() - startDate.getTime();
   return diff / 60000;
 };
 
-const Ranking = ({ name, correct, incorrect, time }) => {
+const Ranking = ({ name, correct, incorrect, time, storageName }) => {
+  const [playVictory] = useSound(victorySound);
   const [showResult, setShowResult] = useState(false);
   const [ranking, setRanking] = useState([]);
-  const [minutes, setMinutes] = useState(0);
+  const minutesRef = useRef(getMinutesBetweenDates(time, new Date()).toFixed(2));
+
+  // Play victory sound!!
+  useEffect(() => {
+    playVictory();
+  }, [playVictory]);
 
   useEffect(() => {
-    if (time) setMinutes(Math.ceil(getMinutesBetweenDates(time, new Date())));
-
     try {
-      const ranks = JSON.parse(localStorage.getItem('trivia-ranking')) || [];
+      const ranks = JSON.parse(localStorage.getItem(storageName)) || [];
       setRanking(ranks);
 
       // Validate inputs for new insert of rank
-      if (!name || !correct || !incorrect || !time) return;
+      if (!name || !time) return;
       setShowResult(true);
 
       const newRank = {
         name,
         correct,
         incorrect,
-        time,
+        time: minutesRef.current,
       };
 
       let newRanking = [...ranks, newRank];
       newRanking = newRanking.sort((a, b) => {
-        return b.correct - a.correct;
+        return b.correct - a.correct - (b.time - a.time);
       });
       setRanking(newRanking);
 
-      localStorage.setItem('trivia-ranking', JSON.stringify(newRanking));
+      localStorage.setItem(storageName, JSON.stringify(newRanking));
     } catch (error) {
       console.log(error);
     }
-  }, [name, correct, incorrect, time]);
+  }, [name, correct, incorrect, time, storageName]);
 
   return (
     <div>
       {showResult && (
         <>
-          <h4 className='my-5 font-italic'>Congratulations {name}!</h4>
-          <p className='text-success'>Correct: {correct}</p>
-          <p className='text-danger'>Incorrect: {incorrect}</p>
-          <p className='text-warning'>Time: {minutes} minute(s)</p>
+          <h4 className='my-5 font-italic'>
+            Congratulations <span className='text-primary'>{name}</span>!
+          </h4>
+          {correct > 0 && <p className='text-success'>Correct: {correct}</p>}
+          {incorrect > 0 && <p className='text-danger'>Errors: {incorrect}</p>}
+          <p className='text-warning'>Time: {minutesRef.current} minutes</p>
         </>
       )}
       <h4 className='my-5 text-center text-decoration'>
         <u>RANKING</u>
       </h4>
-      <ul className='list-group'>
+      <ul className='list-group my-4'>
         {ranking?.length > 0 &&
           ranking.map((rank, index) => <RankingItem key={index} index={index} {...rank} />)}
       </ul>
@@ -63,11 +71,17 @@ const Ranking = ({ name, correct, incorrect, time }) => {
   );
 };
 
+Ranking.defaultProps = {
+  correct: 0,
+  incorrect: 0,
+};
+
 Ranking.propTypes = {
   name: PropTypes.string.isRequired,
   correct: PropTypes.number.isRequired,
   incorrect: PropTypes.number.isRequired,
   time: PropTypes.object.isRequired,
+  storageName: PropTypes.string.isRequired,
 };
 
 export default Ranking;

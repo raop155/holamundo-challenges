@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import List from './List';
 
 const hours = [
@@ -44,9 +45,11 @@ const Schedule = () => {
   return (
     <main id='schedule'>
       <div className='container'>
-        <h1>#Schedule Challenge</h1>
-        <p className='text-right text-info text-uppercase'>
-          Motorcyclists left: <b className='text-info'>{resources}</b>
+        <Link to='/schedule'>
+          <h1>#Schedule Challenge</h1>
+        </Link>
+        <p className='text-right text-uppercase'>
+          Motorcyclists left: <b>{resources}</b>
         </p>
         <List
           hours={hours}

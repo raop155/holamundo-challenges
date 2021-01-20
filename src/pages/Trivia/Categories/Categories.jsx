@@ -25,19 +25,21 @@ const Categories = () => {
   return (
     <div>
       <h4 className='my-5 font-italic'>Select a category please:</h4>
-      {categories?.length > 0 ? (
-        categories?.map(({ id, name }) => (
-          <button key={id} className='btn btn-info btn-block' onClick={() => setCategory(id)}>
-            {name}
-          </button>
-        ))
-      ) : (
-        <div className='d-flex justify-content-center mt-5'>
-          <div className='spinner-border text-info' role='status'>
-            <span className='sr-only'>Loading...</span>
+      <div className='my-4'>
+        {categories?.length > 0 ? (
+          categories?.map(({ id, name }) => (
+            <button key={id} className='btn btn-info btn-block' onClick={() => setCategory(id)}>
+              {name}
+            </button>
+          ))
+        ) : (
+          <div className='d-flex justify-content-center mt-5'>
+            <div className='spinner-border text-info' role='status'>
+              <span className='sr-only'>Loading...</span>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

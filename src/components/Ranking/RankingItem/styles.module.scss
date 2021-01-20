@@ -1,0 +1,15 @@
+.component {
+  .content {
+    display: flex;
+    align-items: center;
+
+    > * {
+      text-align: center;
+      flex: 1;
+    }
+
+    .name {
+      word-break: break-all;
+    }
+  }
+}

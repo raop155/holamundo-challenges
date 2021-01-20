@@ -24,7 +24,7 @@ const List = ({ hours, resources, addResource, removeResource }) => {
 
   return (
     <div className={styles.component}>
-      <ul className='list-group'>
+      <ul className='list-group my-4'>
         {intervals.map((interval, index) => (
           <ListItem
             key={index}

@@ -13,7 +13,7 @@ const Home = () => {
     <main id='home' className={styles.component}>
       <div className='container'>
         <h1>Challenges:</h1>
-        <ul>
+        <ol>
           {challenges.map(({ title, path }) => {
             return (
               <Link key={path} to={path}>
@@ -21,7 +21,7 @@ const Home = () => {
               </Link>
             );
           })}
-        </ul>
+        </ol>
       </div>
     </main>
   );
