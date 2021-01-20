@@ -1,0 +1,17 @@
+.component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  background: #ddd;
+  font-size: 1.25rem;
+
+  a {
+    color: var(--secondary);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
