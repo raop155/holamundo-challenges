@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className={styles.component}>
       <nav>
-        <Link to='/'>#Hola Mundo #Challenges</Link>
+        <Link to='/'>#HolaMundo #Challenges</Link>
       </nav>
     </header>
   );
